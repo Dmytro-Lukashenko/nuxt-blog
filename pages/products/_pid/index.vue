@@ -1,5 +1,5 @@
 <template>
-  <h1>A single user with ID: {{$route.params.id}}</h1>
+  <h1>Product with PID: {{$route.params.pid}}</h1>
 </template>
 
 <script>
