@@ -14,7 +14,7 @@ module.exports = {
   rules: {},
   overrides: [
     {
-      files: ['src/**/*.vue'],
+      files: ['src/**/*.commitue'],
       rules: {
         'vue/multi-word-component-names': 0,
       },
