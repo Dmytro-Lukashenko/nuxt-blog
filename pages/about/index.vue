@@ -14,9 +14,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.about-page{
-    text-align: center;
-    padding: 30px;
-}
+<style lang="sass" scoped>
+  @import 'about.scss'
 </style>

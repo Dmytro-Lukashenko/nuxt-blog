@@ -13,10 +13,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.posts-page{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+<style lang="sass" scoped>
+    @import 'posts.scss'
 </style>

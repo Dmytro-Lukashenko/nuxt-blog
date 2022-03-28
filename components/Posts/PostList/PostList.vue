@@ -1,6 +1,7 @@
 <template>
   <section class="post-list">
       <post-preview
+        :is-admin="isAdmin"
         id="1"
         title="Hello there!"
         preview-text="This is my first post"
@@ -14,6 +15,12 @@ import PostPreview from '@/components/Posts/PostPreview/PostPreview'
 export default {
   components: {
     PostPreview
+  },
+  props: {
+    isAdmin:{
+      type:Boolean,      
+      default:false
+    }
   }
 }
 </script>
