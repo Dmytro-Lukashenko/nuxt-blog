@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import axios from 'axios'
 
 const createStore = () => {
   // eslint-disable-next-line import/no-named-as-default-member
@@ -10,38 +11,54 @@ const createStore = () => {
       setPosts(state, posts) {
         state.loadedPosts = posts
       },
+      addPost(state, post) {
+        state.loadedPosts.push(post)
+      },
+      editPost(state, editedPost) {
+        console.log(editedPost)
+        const postIndex = state.loadedPosts.findIndex(
+          (post) => post.id === editedPost.id
+        )
+        state.loadedPosts[postIndex] = editedPost
+      },
     },
     actions: {
       nuxtServerInit(vuexContext, context) {
-        return new Promise((resolve, reject) => {
-          // eslint-disable-next-line nuxt/no-timing-in-fetch-data
-          setTimeout(() => {
-            vuexContext.commit('setPosts', [
-              {
-                id: '1',
-                title: 'First Post',
-                previewText: 'This is our first post',
-                thumbnail:
-                  'https://www.garlicandzest.com/wp-content/uploads/2015/10/irish-mocha-latte-21.jpg',
-              },
-              {
-                id: '2',
-                title: 'Second Post',
-                previewText: 'This is our second post',
-                thumbnail:
-                  'https://www.garlicandzest.com/wp-content/uploads/2015/10/irish-mocha-latte-21.jpg',
-              },
-              {
-                id: '3',
-                title: 'Third Post',
-                previewText: 'This is our third post',
-                thumbnail:
-                  'https://www.garlicandzest.com/wp-content/uploads/2015/10/irish-mocha-latte-21.jpg',
-              },
-            ])
-            resolve()
-          }, 1000)
-        })
+        return axios
+          .get('https://nuxt-blog-37d55-default-rtdb.firebaseio.com/posts.json')
+          .then((res) => {
+            const postsArray = []
+            for (const key in res.data) {
+              postsArray.push({ ...res.data[key], id: key })
+            }
+            vuexContext.commit('setPosts', postsArray)
+          })
+          .catch((e) => context.error(e))
+      },
+      addPost(vuexContext, post) {
+        const createdPost = { ...post, updatedDate: new Date() }
+        return axios
+          .post(
+            'https://nuxt-blog-37d55-default-rtdb.firebaseio.com/posts.json',
+            createdPost
+          )
+          .then((res) => {
+            vuexContext.commit('addPost', { ...createdPost, id: res.data.name })
+          })
+          .catch((e) => console.log(e))
+      },
+      editPost(vuexContext, editedPost) {
+        return axios
+          .put(
+            'https://nuxt-blog-37d55-default-rtdb.firebaseio.com/posts/' +
+              editedPost.id +
+              '.json',
+            editedPost
+          )
+          .then((res) => {
+            vuexContext.commit('editPost', editedPost)
+          })
+          .catch((e) => console.log(e))
       },
       setPosts(vuexContext, posts) {
         vuexContext.commit('setPosts', posts)

@@ -2,12 +2,17 @@
   <form @submit.prevent="onSave">
         <app-control-input v-model="editedPost.author">Author Name</app-control-input>
         <app-control-input v-model="editedPost.title">Title</app-control-input>
-        <app-control-input v-model="editedPost.thumbnailLink">Thumbnail Link</app-control-input>
+        <app-control-input v-model="editedPost.thumbnail">Thumbnail Link</app-control-input>
         <app-control-input 
         v-model="editedPost.content"
         control-type="textarea"
         >
         Content</app-control-input>
+        <app-control-input 
+        v-model="editedPost.previewText"
+        control-type="textarea"
+        >
+        Preview Text</app-control-input>
         <app-button type="submit">Save</app-button>
         <app-button
         type="button"
@@ -40,15 +45,15 @@ components: {
               : {
                 author: '',
                 title: '',
-                thumbnailLink: '',
-                content: ''
+                thumbnail: '',
+                content: '',
+                previewText: ''
             }
         }
     },
     methods: {
-        onSave () {
-            // eslint-disable-next-line no-console
-            console.log(this.editedPost)
+        onSave () {          
+            this.$emit('submit', this.editedPost)
         },
         onCancel () {
             this.$router.push('/admin');

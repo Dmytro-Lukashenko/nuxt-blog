@@ -15,22 +15,16 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-    asyncData(context, callback) {
-        // eslint-disable-next-line nuxt/no-timing-in-fetch-data
-        setTimeout(() => {
-            callback(null, {
-                loadedPost: {
-                    id:'1',
-                    title:"First Post (ID: " + context.route.params.id +")",
-                    previewText:'This is our first post',
-                    author: 'Maximillian',
-                    updatedDate: new Date(),
-                    content: 'Some text wich is definitely not the preview text though!',
-                    thumbnail:'https://www.garlicandzest.com/wp-content/uploads/2015/10/irish-mocha-latte-21.jpg'
-                }
-            })
-        },1000)
+    asyncData(context) {
+        return axios.get('https://nuxt-blog-37d55-default-rtdb.firebaseio.com/posts/' + context.params.id + '.json')
+        .then(res => {
+            return {
+                loadedPost: res.data
+            }
+        })
+        .catch((e) => context.error(e))
     }
 }
 </script>
