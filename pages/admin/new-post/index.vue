@@ -7,17 +7,12 @@
 </template>
 
 <script>
-import AdminPostForm from '@/components/Admin/AdminPostForm'
-export default {
-    components: {
-        AdminPostForm
-    },
+export default {   
     layout: 'admin',  
     methods: {
         onSubmitted (postData) {
            this.$store.dispatch('addPost', postData)
-           .then(() => {
-               console.log('ok')
+           .then(() => {               
                this.$router.push('/admin');
            });
         },      

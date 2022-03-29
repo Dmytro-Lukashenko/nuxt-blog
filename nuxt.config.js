@@ -22,12 +22,12 @@ export default {
       },
     ],
   },
-
+  loading: false,
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~/assets/styles/main.css'],
+  css: ['~assets/styles/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~plugins/core-components.js', '~plugins/date-filter.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -39,8 +39,26 @@ export default {
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [],
+  modules: ['@nuxtjs/axios'],
+
+  axios: {
+    baseURL:
+      process.env.BASE_URL ||
+      'https://nuxt-blog-37d55-default-rtdb.firebaseio.com/',
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  env: {
+    baseUrl:
+      process.env.BASE_URL ||
+      'https://nuxt-blog-37d55-default-rtdb.firebaseio.com/',
+  },
+  transition: {
+    name: 'fade',
+    mode: 'out-in',
+  },
+  router: {
+    middleware: 'log',
+  },
 }
