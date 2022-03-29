@@ -8,7 +8,8 @@
 
 <script>
 export default {   
-    layout: 'admin',  
+    layout: 'admin',
+    middleware: ['check-auth','auth'],  
     methods: {
         onSubmitted (postData) {
            this.$store.dispatch('addPost', postData)
