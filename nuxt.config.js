@@ -1,3 +1,6 @@
+// eslint-disable-next-line nuxt/no-cjs-in-config
+const bodyParser = require('body-parser')
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -59,7 +62,8 @@ export default {
     name: 'fade',
     mode: 'out-in',
   },
-  router: {
-    middleware: 'log',
-  },
+  // router: {
+  //   middleware: 'log',
+  // },
+  serverMiddleware: [bodyParser.json(), '~/api'],
 }

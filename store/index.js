@@ -84,22 +84,20 @@ const createStore = () => {
             localStorage.setItem('token', result.idToken)
             localStorage.setItem(
               'tokenExpiration',
-              new Date().getTime() + result.expiresIn * 1000
+              new Date().getTime() + +result.expiresIn * 1000
             )
             Cookie.set('jwt', result.idToken)
             Cookie.set(
               'expirationDate',
-              new Date().getTime() + result.expiresIn * 1000
+              new Date().getTime() + +result.expiresIn * 1000
             )
-            vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
+            return this.$axios.$post('http://localhost:3000/api/track-data', {
+              data: 'Authenticated!',
+            })
           })
           .catch((e) => console.log(e))
       },
-      setLogoutTimer(vuexContext, duration) {
-        setTimeout(() => {
-          vuexContext.commit('clearToken')
-        }, duration)
-      },
+
       initAuth(vuexContext, req) {
         let token
         let expirationDate
@@ -120,16 +118,22 @@ const createStore = () => {
         } else {
           token = localStorage.getItem('token')
           expirationDate = localStorage.getItem('tokenExpiration')
-          if (new Date().getTime() > +expirationDate || !token) {
-            return
-          }
         }
-
-        vuexContext.dispatch(
-          'setLogoutTimer',
-          +expirationDate - new Date().getTime()
-        )
+        if (new Date().getTime() > +expirationDate || !token) {
+          console.log('No token or invalid token')
+          vuexContext.dispatch('logout')
+          return
+        }
         vuexContext.commit('setToken', token)
+      },
+      logout(vuexContext) {
+        this.commit('clearToken')
+        Cookie.remove('token')
+        Cookie.remove('expirationDate')
+        if (process.client) {
+          localStorage.removeItem('token')
+          localStorage.removeItem('tokenExpiration')
+        }
       },
     },
     getters: {
