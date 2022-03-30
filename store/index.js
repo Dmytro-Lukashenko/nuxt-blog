@@ -1,4 +1,5 @@
 import Vuex from 'vuex'
+import Cookie from 'js-cookie'
 
 const createStore = () => {
   // eslint-disable-next-line import/no-named-as-default-member
@@ -85,6 +86,11 @@ const createStore = () => {
               'tokenExpiration',
               new Date().getTime() + result.expiresIn * 1000
             )
+            Cookie.set('jwt', result.idToken)
+            Cookie.set(
+              'expirationDate',
+              new Date().getTime() + result.expiresIn * 1000
+            )
             vuexContext.dispatch('setLogoutTimer', result.expiresIn * 1000)
           })
           .catch((e) => console.log(e))
@@ -94,12 +100,31 @@ const createStore = () => {
           vuexContext.commit('clearToken')
         }, duration)
       },
-      initAuth(vuexContext) {
-        const token = localStorage.getItem('token')
-        const expirationDate = localStorage.getItem('tokenExpiration')
-        if (new Date().getTime() > +expirationDate || !token) {
-          return
+      initAuth(vuexContext, req) {
+        let token
+        let expirationDate
+        if (req) {
+          if (!req.headers.cookie) {
+            const jwtCookie = req.headers.cookie
+              .split(';')
+              .find((key) => key.trim().startsWith('jwt='))
+            if (!jwtCookie) {
+              return
+            }
+            token = jwtCookie.split('=')[1]
+            expirationDate = req.headers.cookie
+              .split(';')
+              .find((key) => key.trim().startsWith('expirationDate='))
+              .split('=')[1]
+          }
+        } else {
+          token = localStorage.getItem('token')
+          expirationDate = localStorage.getItem('tokenExpiration')
+          if (new Date().getTime() > +expirationDate || !token) {
+            return
+          }
         }
+
         vuexContext.dispatch(
           'setLogoutTimer',
           +expirationDate - new Date().getTime()
