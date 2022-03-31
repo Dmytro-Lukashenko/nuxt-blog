@@ -1,30 +1,9 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app'
-import { getAnalytics } from 'firebase/analytics'
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: 'AIzaSyCnX7V7hu19JbJCQskl5j_jeAcxZFCJpYs',
-  authDomain: 'nuxt-blog-37d55.firebaseapp.com',
-  databaseURL: 'https://nuxt-blog-37d55-default-rtdb.firebaseio.com',
-  projectId: 'nuxt-blog-37d55',
-  storageBucket: 'nuxt-blog-37d55.appspot.com',
-  messagingSenderId: '517515872993',
-  appId: '1:517515872993:web:be186efc01b247b089c5a0',
-  measurementId: 'G-2YJXNPN6Q2',
-}
-
-// Initialize Firebase
-
 // eslint-disable-next-line nuxt/no-cjs-in-config
 const bodyParser = require('body-parser')
 
 export default {
-  mode: 'universal',
   // Target: https://go.nuxtjs.dev/config-target
+  target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {

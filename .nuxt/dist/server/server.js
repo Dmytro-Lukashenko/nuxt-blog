@@ -2049,7 +2049,7 @@ async function setContext(app, context) {
   // If context not defined, create it
   if (!app.context) {
     app.context = {
-      isStatic: false,
+      isStatic: true,
       isDev: false,
       isHMR: false,
       app,
@@ -2062,14 +2062,6 @@ async function setContext(app, context) {
         "fbAPIKey": "AIzaSyCnX7V7hu19JbJCQskl5j_jeAcxZFCJpYs"
       }
     }; // Only set once
-
-    if (context.req) {
-      app.context.req = context.req;
-    }
-
-    if (context.res) {
-      app.context.res = context.res;
-    }
 
     if (context.ssrContext) {
       app.context.ssrContext = context.ssrContext;
@@ -3113,6 +3105,16 @@ const layouts = {
     this.context = this.$options.context;
   },
 
+  async mounted() {
+    if (this.isPreview) {
+      if (this.$store && this.$store._actions.nuxtServerInit) {
+        await this.$store.dispatch('nuxtServerInit', this.context);
+      }
+
+      await this.refresh();
+    }
+  },
+
   watch: {
     'nuxt.err': 'errorChanged'
   },
@@ -3123,6 +3125,10 @@ const layouts = {
 
     isFetching() {
       return this.nbFetching > 0;
+    },
+
+    isPreview() {
+      return Boolean(this.$options.previewData);
     }
 
   },
@@ -3201,6 +3207,62 @@ const layouts = {
       }
 
       return Promise.resolve(layouts['_' + layout]);
+    },
+
+    getRouterBase() {
+      return Object(external_ufo_["withoutTrailingSlash"])(this.$router.options.base);
+    },
+
+    getRoutePath(route = '/') {
+      const base = this.getRouterBase();
+      return Object(external_ufo_["withoutTrailingSlash"])(Object(external_ufo_["withoutBase"])(Object(external_ufo_["parsePath"])(route).pathname, base));
+    },
+
+    getStaticAssetsPath(route = '/') {
+      const {
+        staticAssetsBase
+      } = window.__NUXT__;
+      return urlJoin(staticAssetsBase, this.getRoutePath(route));
+    },
+
+    async fetchStaticManifest() {
+      return window.__NUXT_IMPORT__('manifest.js', Object(external_ufo_["normalizeURL"])(urlJoin(this.getStaticAssetsPath(), 'manifest.js')));
+    },
+
+    setPagePayload(payload) {
+      this._pagePayload = payload;
+      this._fetchCounters = {};
+    },
+
+    async fetchPayload(route, prefetch) {
+      const path = Object(external_ufo_["decode"])(this.getRoutePath(route));
+      const manifest = await this.fetchStaticManifest();
+
+      if (!manifest.routes.includes(path)) {
+        if (!prefetch) {
+          this.setPagePayload(false);
+        }
+
+        throw new Error(`Route ${path} is not pre-rendered`);
+      }
+
+      const src = urlJoin(this.getStaticAssetsPath(route), 'payload.js');
+
+      try {
+        const payload = await window.__NUXT_IMPORT__(path, Object(external_ufo_["normalizeURL"])(src));
+
+        if (!prefetch) {
+          this.setPagePayload(payload);
+        }
+
+        return payload;
+      } catch (err) {
+        if (!prefetch) {
+          this.setPagePayload(false);
+        }
+
+        throw err;
+      }
     }
 
   }
@@ -3945,7 +4007,11 @@ const createNext = ssrContext => opts => {
     routePath: ''
   };
   ssrContext.fetchCounters = {}; // Remove query from url is static target
-  // Public runtime config
+
+  if (ssrContext.url) {
+    ssrContext.url = ssrContext.url.split('?')[0];
+  } // Public runtime config
+
 
   ssrContext.nuxt.config = ssrContext.runtimeConfig.public;
 
@@ -3978,7 +4044,9 @@ const createNext = ssrContext => opts => {
 
     ssrContext.rendered = () => {
       // Add the state from the vuex store
-      ssrContext.nuxt.state = store.state;
+      ssrContext.nuxt.state = store.state; // Stop recording store mutations
+
+      ssrContext.unsetMutationObserver();
     };
   };
 
@@ -4060,11 +4128,16 @@ const createNext = ssrContext => opts => {
 
   if (ssrContext.nuxt.error) {
     return renderErrorPage();
-  }
+  } // Record store mutations for full-static after nuxtServerInit and Middleware
+
+
+  ssrContext.nuxt.mutations = [];
+  ssrContext.unsetMutationObserver = store.subscribe(m => {
+    ssrContext.nuxt.mutations.push([m.type, m.payload]);
+  });
   /*
   ** Set layout
   */
-
 
   let layout = Components.length ? Components[0].options.layout : layouts_error.layout;
 
