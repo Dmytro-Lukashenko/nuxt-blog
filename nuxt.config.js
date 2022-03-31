@@ -69,7 +69,7 @@ export default {
   // },
   serverMiddleware: [bodyParser.json(), '~/api'],
   generate: {
-    routes: function () {
+    routes() {
       return axios
         .get('https://nuxt-blog-37d55-default-rtdb.firebaseio.com/posts.json')
         .then((res) => {
