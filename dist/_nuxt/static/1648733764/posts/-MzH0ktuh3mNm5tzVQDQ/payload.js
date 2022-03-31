@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/posts/-MzH0ktuh3mNm5tzVQDQ", {data:[{loadedPost:{author:"Dmitry",content:"Nothing else matters - Metallica",id:"-MzH0ktuh3mNm5tzVQDQ",previewText:"Nothing else ",thumbnail:"https:\u002F\u002Fwww.noviscore.com\u002Fsleeve255-nothing-else-matters-metallica.jpg",title:"Nothing else matters",updatedDate:"2022-03-28T19:35:50.977Z"}}],fetch:{},mutations:[]});

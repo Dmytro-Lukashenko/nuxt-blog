@@ -1,5 +1,6 @@
 // eslint-disable-next-line nuxt/no-cjs-in-config
 const bodyParser = require('body-parser')
+const axios = require('axios')
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -66,4 +67,17 @@ export default {
   //   middleware: 'log',
   // },
   serverMiddleware: [bodyParser.json(), '~/api'],
+  generate: {
+    routes() {
+      return axios
+        .get('https://nuxt-blog-37d55-default-rtdb.firebaseio.com/posts.json')
+        .then((res) => {
+          const routes = []
+          for (const key in res.data) {
+            routes.push('/posts/' + key)
+          }
+          return routes
+        })
+    },
+  },
 }

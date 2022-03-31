@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/posts/-MzRDVKv-D5jXDWuKvon", {data:[{loadedPost:{author:"Victory",content:"We are the champions my friend",previewText:"Champions forever",thumbnail:"https:\u002F\u002Fwww.billboard.com\u002Fwp-content\u002Fuploads\u002Fmedia\u002Fvictory-2017-billboard-1548.jpg",title:"Victory Post",updatedDate:"2022-03-30T19:07:43.946Z"}}],fetch:{},mutations:[]});
