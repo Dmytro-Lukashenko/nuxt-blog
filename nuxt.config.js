@@ -1,5 +1,6 @@
 // eslint-disable-next-line nuxt/no-cjs-in-config
 const bodyParser = require('body-parser')
+// eslint-disable-next-line nuxt/no-cjs-in-config
 const axios = require('axios')
 
 export default {
@@ -74,7 +75,10 @@ export default {
         .then((res) => {
           const routes = []
           for (const key in res.data) {
-            routes.push('/posts/' + key)
+            routes.push({
+              route: '/posts/' + key,
+              payload: { postData: res.data[key] },
+            })
           }
           return routes
         })
