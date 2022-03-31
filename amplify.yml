@@ -6,9 +6,9 @@ frontend:
         - npm install
     build:
       commands:
-        - npm run build
+        - npm run generate
   artifacts:
-    baseDirectory: .nuxt/dist
+    baseDirectory: dist
     files:
       - '**/*'
   cache:
