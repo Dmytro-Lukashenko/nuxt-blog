@@ -4,7 +4,6 @@ const bodyParser = require('body-parser')
 export default {
   mode: 'universal',
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
