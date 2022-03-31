@@ -11,6 +11,7 @@
           style="margin-left: 10px"
           @click="isLogin =!isLogin"
           >Switch to {{ isLogin ? 'Sign Up' : 'Login' }}</app-button>
+          <app-button @click="$router.push('/')">Home</app-button>
       </form>
     </div>
   </div>
