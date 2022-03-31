@@ -5,8 +5,8 @@ const axios = require('axios')
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
+  mode: 'static',
   target: 'static',
-
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'nuxt-blog',
