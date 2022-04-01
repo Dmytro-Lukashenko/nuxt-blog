@@ -1,4 +1,57 @@
-.about-page{
+.about {
+    position: relative; 
+    height: 93vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.about::before {
+      content: "";       
+      box-sizing: border-box;
+      background-image: url('/images/desktop/nuxt_background.jpg');
+      background-size: cover;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      opacity: 0.5;
+    
+}
+
+.about-content { 
+    position:relative;        
+    margin:44px;
+    height: 70vh;
+    border: 1px solid #0e3d47;    
+    color: #0e3d47;
     text-align: center;
-    padding: 30px;
+
+    &-logo {
+        position:absolute;
+        top:15px;
+        left:15px;
+    }
+
+    &-title {
+        margin:0;
+        font-size: 3rem;        
+        color: #1434a0;
+    }
+
+    &-text {        
+        font-size: 1.5rem;
+        font-weight:700;
+    }
+
+    &-list {
+        list-style: none;
+        font-size: 1.5rem;
+        font-weight:700;
+
+        &_item {                      
+            color: #1434a0;
+        }
+    }
 }

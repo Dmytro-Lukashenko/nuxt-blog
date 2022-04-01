@@ -771,7 +771,7 @@ __webpack_require__(4).default("12ba2d00", content, true)
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(3);
 var ___CSS_LOADER_EXPORT___ = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-___CSS_LOADER_EXPORT___.push([module.i, "body,html{margin:0;font-family:\"Open Sans\",sans-serif}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-enter,.fade-leave-to{opacity:0}", ""]);
+___CSS_LOADER_EXPORT___.push([module.i, "body,html{margin:0;font-family:\"Open Sans\",sans-serif;overflow:auto}.fade-enter-active,.fade-leave-active{transition:opacity .5s}.fade-enter,.fade-leave-to{opacity:0}", ""]);
 // Exports
 module.exports = ___CSS_LOADER_EXPORT___;
 
