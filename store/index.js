@@ -1,5 +1,12 @@
 import Vuex from 'vuex'
 import Cookie from 'js-cookie'
+import {
+  SET_POSTS,
+  ADD_POST,
+  EDIT_POST,
+  SET_TOKEN,
+  CLEAR_TOKEN,
+} from './-listMutations'
 
 const createStore = () => {
   // eslint-disable-next-line import/no-named-as-default-member
@@ -9,27 +16,28 @@ const createStore = () => {
       token: null,
     },
     mutations: {
-      setPosts(state, posts) {
+      [SET_POSTS](state, posts) {
         state.loadedPosts = posts
       },
-      addPost(state, post) {
+      [ADD_POST](state, post) {
         state.loadedPosts.push(post)
       },
-      editPost(state, editedPost) {
+      [EDIT_POST](state, editedPost) {
         const postIndex = state.loadedPosts.findIndex(
           (post) => post.id === editedPost.id
         )
         state.loadedPosts[postIndex] = editedPost
       },
-      setToken(state, token) {
+      [SET_TOKEN](state, token) {
         state.token = token
       },
-      clearToken(state) {
+      [CLEAR_TOKEN](state) {
         state.token = null
       },
     },
     actions: {
       nuxtServerInit(vuexContext, context) {
+        console.log(vuexContext)
         return context.app.$axios
           .$get('posts.json')
           .then((data) => {
@@ -37,7 +45,7 @@ const createStore = () => {
             for (const key in data) {
               postsArray.push({ ...data[key], id: key })
             }
-            vuexContext.commit('setPosts', postsArray)
+            vuexContext.commit('SET_POSTS', postsArray)
           })
           .catch((e) => context.error(e))
       },
@@ -46,7 +54,7 @@ const createStore = () => {
         return this.$axios
           .$post('posts.json?auth=' + vuexContext.state.token, createdPost)
           .then((data) => {
-            vuexContext.commit('addPost', { ...createdPost, id: data.name })
+            vuexContext.commit('ADD_POST', { ...createdPost, id: data.name })
           })
           .catch((e) => console.log(e))
       },
@@ -57,12 +65,12 @@ const createStore = () => {
             editedPost
           )
           .then((res) => {
-            vuexContext.commit('editPost', editedPost)
+            vuexContext.commit('EDIT_POST', editedPost)
           })
           .catch((e) => console.log(e))
       },
       setPosts(vuexContext, posts) {
-        vuexContext.commit('setPosts', posts)
+        vuexContext.commit('SET_POSTS', posts)
       },
       authenticateUser(vuexContext, authData) {
         let authUrl =
@@ -80,7 +88,7 @@ const createStore = () => {
             returnSecureToken: true,
           })
           .then((result) => {
-            vuexContext.commit('setToken', result.idToken)
+            vuexContext.commit('SET_TOKEN', result.idToken)
             localStorage.setItem('token', result.idToken)
             localStorage.setItem(
               'tokenExpiration',
@@ -124,10 +132,10 @@ const createStore = () => {
           vuexContext.dispatch('logout')
           return
         }
-        vuexContext.commit('setToken', token)
+        vuexContext.commit('SET_TOKEN', token)
       },
       logout(vuexContext) {
-        this.commit('clearToken')
+        this.commit('CLEAR_TOKEN')
         Cookie.remove('token')
         Cookie.remove('expirationDate')
         if (process.client) {

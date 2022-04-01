@@ -8,6 +8,13 @@
     <div class="bar"></div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "TheSidenavToggle",
+};
+</script>
+
 <style lang="scss" scoped>
     @import 'TheSideNavToggle.scss'
 </style>

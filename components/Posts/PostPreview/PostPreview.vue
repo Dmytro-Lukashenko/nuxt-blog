@@ -22,7 +22,7 @@ export default {
         },
         isAdmin: {
             type:Boolean,
-            required:true,
+            required:false,
             default:false
         },
         title: {
@@ -39,7 +39,7 @@ export default {
         }
     },
     computed: {
-        postLink() {
+        postLink() {            
             return this.isAdmin ? '/admin/' + this.id : '/posts/' + this.id
         }
     }

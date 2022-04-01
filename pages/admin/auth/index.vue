@@ -10,8 +10,7 @@
           btn-style="inverted"
           style="margin-left: 10px"
           @click="isLogin =!isLogin"
-          >Switch to {{ isLogin ? 'Sign Up' : 'Login' }}</app-button>
-          <app-button @click="$router.push('/')">Home</app-button>
+          >Switch to {{ isLogin ? 'Sign Up' : 'Login' }}</app-button>          
       </form>
     </div>
   </div>
@@ -39,7 +38,7 @@ export default {
         this.$router.push('/admin')
       })
       .catch(e => console.log(e))
-    } 
+    },   
   }
 }
 

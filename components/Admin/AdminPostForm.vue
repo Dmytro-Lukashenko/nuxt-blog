@@ -27,7 +27,8 @@
 import AppControlInput from '@/components/UI/AppControlInput/AppControlInput'
 import AppButton from '@/components/UI/AppButton/AppButton'
 export default {
-components: {
+    name: 'AdminPostForm',
+    components: {
         AppControlInput,
         AppButton
     },

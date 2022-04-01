@@ -9,7 +9,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: black;
+    background-color: #0e3d47;
     z-index: 100;
     box-sizing: border-box;
     padding: 0 20px;
@@ -58,5 +58,5 @@
   .nav-item a:hover,
   .nav-item a:active,
   .nav-item a.nuxt-link-active {
-    color: red;
+    color: #41b883;
   }

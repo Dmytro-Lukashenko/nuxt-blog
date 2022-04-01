@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'server',
+  target: 'universal',
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -18,7 +18,11 @@ export default {
       { name: 'format-detection', content: 'telephone=no' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: 'icons/favicon.ico',
+      },
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap',
@@ -27,13 +31,13 @@ export default {
   },
   loading: false,
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~assets/styles/main.css'],
+  css: ['~assets/scss/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~plugins/core-components.js', '~plugins/date-filter.js'],
+  plugins: ['~plugins/global-components.js', '~plugins/date-filter.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: false,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -62,8 +66,5 @@ export default {
     name: 'fade',
     mode: 'out-in',
   },
-  // router: {
-  //   middleware: 'log',
-  // },
   serverMiddleware: [bodyParser.json(), '~/api'],
 }

@@ -18,13 +18,9 @@
 </template>
 
 <script>
-import TheSideNavToggle from "@/components/Navigation/TheSideNavToggle/TheSideNavToggle";
 
 export default {
-  name: "TheHeader",
-  components: {
-    TheSideNavToggle
-  }
+  name: "TheHeader", 
 };
 </script>
 <style lang="sass" scoped>

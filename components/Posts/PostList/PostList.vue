@@ -15,12 +15,14 @@
 <script>
 import PostPreview from '@/components/Posts/PostPreview/PostPreview'
 export default {
+  name:'PostList',
   components: {
     PostPreview
   },
   props: {
     isAdmin:{
-      type:Boolean,      
+      type:Boolean,
+      required:false,
       default:false
     },
     // eslint-disable-next-line vue/require-default-prop

@@ -10,14 +10,7 @@
 </template>
 
 <script>
-import TheHeader from '@/components/Navigation/TheHeader/TheHeader'
-import TheSidenav from '@/components/Navigation/TheSidenav/TheSidenav'
-export default {
-    components: {
-     TheHeader,
-     TheSidenav
-    },
-    // middleware: 'log',
+export default {        
     data () {
         return {
             displaySidenav: false
