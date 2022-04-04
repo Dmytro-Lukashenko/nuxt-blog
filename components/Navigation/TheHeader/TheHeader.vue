@@ -1,28 +1,42 @@
 <template>
-<div class="header-container">
-  <header class="the-header">
-    <TheSideNavToggle @toggle="$emit('sidenavToggle')" />
-    <div class="logo">
-      <nuxt-link to="/">WD BLOG</nuxt-link>
-    </div>
-    <div class="spacer"></div>
-    <div class="navigation-items">
-      <ul class="nav-list">
-        <li class="nav-item"><nuxt-link to="/posts">Blog</nuxt-link></li>
-        <li class="nav-item"><nuxt-link to="/about">About</nuxt-link></li>
-        <li class="nav-item"><nuxt-link to="/admin">Admin</nuxt-link></li>
-      </ul>
-    </div>
-  </header>
-</div>
+  <div class="container">
+    <header class="header">
+      <the-side-nav-toggle @toggle="$emit('sidenavToggle')" />
+      <div class="header__logo">
+        <nuxt-link to="/" class="header__logo_link">WD BLOG</nuxt-link>
+      </div>
+      <div class="header__spacer" />
+      <nav-list         
+        :menu="menu" 
+      />
+    </header>
+  </div>
 </template>
 
 <script>
-
+import TheSideNavToggle from '../TheSideNavToggle/TheSideNavToggle.vue'
 export default {
-  name: "TheHeader", 
-};
+  components: { TheSideNavToggle },
+  data() {
+    return {
+      menu: [
+        {
+          title: 'Blog',
+          path: '/posts'
+        },
+        {
+          title: 'About',
+          path: '/about'
+        },
+        {
+          title: 'Admin',
+          path: '/admin'
+        },
+      ]
+    }
+  }}
 </script>
-<style lang="sass" scoped>
-  @import 'TheHeader.scss'
+
+<style lang="scss" scoped>
+@import 'TheHeader.scss'
 </style>

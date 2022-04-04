@@ -1,4 +1,5 @@
 import Vue from 'vue'
+
 const months = [
   'January',
   'February',
@@ -23,7 +24,6 @@ function formatDate(inputDate) {
   const year = date.getFullYear()
   const month = date.getMonth()
   const day = date.getDate()
-  const formattedDate = day + '. ' + months[month] + ' ' + year
-  return formattedDate
+  return day + '. ' + months[month] + ' ' + year
 }
 Vue.filter('date', dateFilter)

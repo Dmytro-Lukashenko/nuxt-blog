@@ -7,10 +7,10 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _e64c6752 = () => interopDefault(import('..\\pages\\about\\index.vue' /* webpackChunkName: "pages/about/index" */))
 const _2086df55 = () => interopDefault(import('..\\pages\\admin\\index.vue' /* webpackChunkName: "pages/admin/index" */))
 const _3466a75e = () => interopDefault(import('..\\pages\\posts\\index.vue' /* webpackChunkName: "pages/posts/index" */))
-const _5b41b0ed = () => interopDefault(import('..\\pages\\admin\\auth\\index.vue' /* webpackChunkName: "pages/admin/auth/index" */))
-const _2df30748 = () => interopDefault(import('..\\pages\\admin\\new-post\\index.vue' /* webpackChunkName: "pages/admin/new-post/index" */))
-const _502c3b45 = () => interopDefault(import('..\\pages\\admin\\_postid\\index.vue' /* webpackChunkName: "pages/admin/_postid/index" */))
-const _3360a92e = () => interopDefault(import('..\\pages\\posts\\_id\\index.vue' /* webpackChunkName: "pages/posts/_id/index" */))
+const _797a1416 = () => interopDefault(import('..\\pages\\admin\\auth.vue' /* webpackChunkName: "pages/admin/auth" */))
+const _135f800c = () => interopDefault(import('..\\pages\\admin\\new-post.vue' /* webpackChunkName: "pages/admin/new-post" */))
+const _61ae42c6 = () => interopDefault(import('..\\pages\\admin\\_postid.vue' /* webpackChunkName: "pages/admin/_postid" */))
+const _2a8b8ef9 = () => interopDefault(import('..\\pages\\posts\\_id.vue' /* webpackChunkName: "pages/posts/_id" */))
 const _4caf4ee0 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
@@ -38,19 +38,19 @@ export const routerOptions = {
     name: "posts"
   }, {
     path: "/admin/auth",
-    component: _5b41b0ed,
+    component: _797a1416,
     name: "admin-auth"
   }, {
     path: "/admin/new-post",
-    component: _2df30748,
+    component: _135f800c,
     name: "admin-new-post"
   }, {
     path: "/admin/:postid",
-    component: _502c3b45,
+    component: _61ae42c6,
     name: "admin-postid"
   }, {
     path: "/posts/:id",
-    component: _3360a92e,
+    component: _2a8b8ef9,
     name: "posts-id"
   }, {
     path: "/",

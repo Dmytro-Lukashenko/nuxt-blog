@@ -1,27 +1,13 @@
 <template>
   <button
-    class="button"
-    :class="btnStyle"
-    v-bind="$attrs"
-    v-on="$listeners"
+      class="button"
+      v-bind="$attrs"
+      v-on="$listeners"
   >
-  <slot />
+    <slot/>
   </button>
 </template>
 
-<script>
-export default {
-    name: 'AppButton',
-    props: {
-        btnStyle: {
-            type: String,
-            default: ''
-        }
-    }
-
-}
-</script>
-
-<style lang="sass" scoped>
-  @import 'AppButton.scss'
+<style lang="scss" scoped>
+@import 'AppButton.scss';
 </style>

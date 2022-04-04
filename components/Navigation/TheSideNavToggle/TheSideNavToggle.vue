@@ -9,12 +9,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "TheSidenavToggle",
-};
-</script>
-
 <style lang="scss" scoped>
-    @import 'TheSideNavToggle.scss'
+    @import 'TheSideNavToggle.scss';
 </style>

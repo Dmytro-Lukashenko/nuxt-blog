@@ -1,24 +1,23 @@
 .input-control {
-    margin: 10px 0;
-  }
-  
-  .input-control label {
+  margin: 10px 0;
+
+  &__label {
     display: block;
     font-weight: bold;
   }
-  
-  .input-control input,
-  .input-control textarea {
+
+  &__input,
+  &__textarea {
     display: block;
     width: 100%;
     box-sizing: border-box;
     font: inherit;
     border: 1px solid #ccc;
     padding: 5px;
+
+    &:focus {
+      background-color: #eee;
+      outline: none;
+    }
   }
-  
-  .input-control input:focus,
-  .input-control textarea:focus {
-    background-color: #eee;
-    outline: none;
-  }
+}

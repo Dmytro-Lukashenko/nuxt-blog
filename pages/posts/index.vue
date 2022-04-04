@@ -1,20 +1,21 @@
 <template>
   <div class="posts-page">
-      <post-list :posts="loadedPosts" />
+    <post-list :posts="loadedPosts" />
   </div>
 </template>
 
 <script>
+import loadedPosts from '@/mixins/loadedPosts.js'
+
 export default {
-    middleware: 'log',
-    computed: {
-      loadedPosts() {
-          return this.$store.getters.loadedPosts
-      }
-  }
+  mixins: [loadedPosts],
 }
 </script>
 
-<style lang="sass" scoped>
-    @import 'posts.scss'
+<style lang="scss" scoped>
+.posts-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>

@@ -4,6 +4,8 @@ import { decode, parsePath, withoutBase, withoutTrailingSlash, normalizeURL } fr
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
 import NuxtError from '..\\layouts\\error.vue'
 
+import NuxtBuildIndicator from './components/nuxt-build-indicator'
+
 import '..\\assets\\scss\\main.scss'
 
 import _77068119 from '..\\layouts\\admin.vue'
@@ -42,6 +44,7 @@ export default {
       }
     }, [
 
+      h(NuxtBuildIndicator),
       transitionEl
     ])
   },
@@ -161,6 +164,10 @@ export default {
     },
 
     setLayout (layout) {
+      if(layout && typeof layout !== 'string') {
+        throw new Error('[nuxt] Avoid using non-string value as layout property.')
+      }
+
       if (!layout || !layouts['_' + layout]) {
         layout = 'default'
       }

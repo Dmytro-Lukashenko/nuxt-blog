@@ -23,30 +23,30 @@
   {
     "name": "admin-auth",
     "path": "/admin/auth",
-    "component": "C:\\\\Users\\\\daluk\\\\Documents\\\\Levi9 Learning portal\\\\VueJS\\\\nuxt-blog\\\\pages\\\\admin\\\\auth\\\\index.vue",
-    "chunkName": "pages/admin/auth/index",
-    "_name": "_5b41b0ed"
+    "component": "C:\\\\Users\\\\daluk\\\\Documents\\\\Levi9 Learning portal\\\\VueJS\\\\nuxt-blog\\\\pages\\\\admin\\\\auth.vue",
+    "chunkName": "pages/admin/auth",
+    "_name": "_797a1416"
   },
   {
     "name": "admin-new-post",
     "path": "/admin/new-post",
-    "component": "C:\\\\Users\\\\daluk\\\\Documents\\\\Levi9 Learning portal\\\\VueJS\\\\nuxt-blog\\\\pages\\\\admin\\\\new-post\\\\index.vue",
-    "chunkName": "pages/admin/new-post/index",
-    "_name": "_2df30748"
+    "component": "C:\\\\Users\\\\daluk\\\\Documents\\\\Levi9 Learning portal\\\\VueJS\\\\nuxt-blog\\\\pages\\\\admin\\\\new-post.vue",
+    "chunkName": "pages/admin/new-post",
+    "_name": "_135f800c"
   },
   {
     "name": "admin-postid",
     "path": "/admin/:postid",
-    "component": "C:\\\\Users\\\\daluk\\\\Documents\\\\Levi9 Learning portal\\\\VueJS\\\\nuxt-blog\\\\pages\\\\admin\\\\_postid\\\\index.vue",
-    "chunkName": "pages/admin/_postid/index",
-    "_name": "_502c3b45"
+    "component": "C:\\\\Users\\\\daluk\\\\Documents\\\\Levi9 Learning portal\\\\VueJS\\\\nuxt-blog\\\\pages\\\\admin\\\\_postid.vue",
+    "chunkName": "pages/admin/_postid",
+    "_name": "_61ae42c6"
   },
   {
     "name": "posts-id",
     "path": "/posts/:id",
-    "component": "C:\\\\Users\\\\daluk\\\\Documents\\\\Levi9 Learning portal\\\\VueJS\\\\nuxt-blog\\\\pages\\\\posts\\\\_id\\\\index.vue",
-    "chunkName": "pages/posts/_id/index",
-    "_name": "_3360a92e"
+    "component": "C:\\\\Users\\\\daluk\\\\Documents\\\\Levi9 Learning portal\\\\VueJS\\\\nuxt-blog\\\\pages\\\\posts\\\\_id.vue",
+    "chunkName": "pages/posts/_id",
+    "_name": "_2a8b8ef9"
   },
   {
     "name": "index",
