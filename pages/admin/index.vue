@@ -1,11 +1,11 @@
 <template>
   <div class="admin-page">
     <section class="admin-page__new-post">
-      <app-button @click="$router.push('/')">Home</app-button>
-      <app-button @click="$router.push('/admin/new-post')"
-        >Create Post</app-button
+      <app-button @click="$router.push('/')"></app-button>
+      <app-button title="Create Post" @click="$router.push('/admin/new-post')"
+        ></app-button
       >
-      <app-button @click="onLogout">Logout</app-button>
+      <app-button title="Logout" @click="onLogout"></app-button>
     </section>
     <section class="admin-page__posts">
       <h1>Existing Posts</h1>
@@ -20,7 +20,7 @@ import loadedPosts from '@/mixins/loadedPosts.js'
 export default {
   mixins: [loadedPosts],
   layout: 'admin',
-  middleware: ['check-auth', 'auth'],
+  middleware: ['check-auth', 'auth'], 
   methods: {
     onLogout() {
       this.$store.dispatch('logout')

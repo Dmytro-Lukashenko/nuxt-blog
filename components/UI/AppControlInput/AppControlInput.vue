@@ -1,7 +1,7 @@
 <template>
   <div class="input-control">
     <label class="input-control__label">
-      <slot/>
+      {{label}}
     </label>
     <input
         v-if="controlType === 'input'"
@@ -23,11 +23,17 @@ export default {
   props: {
     controlType: {
       type: String,
+      rewquired: true,
       default: 'input'
     },
     value: {
       type: String,
+      required: true,
       default: ''
+    },
+    label:{
+      type: String,
+      required: true,
     }
   },
   methods: {
@@ -38,6 +44,6 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 @import 'AppControlInput.scss'
 </style>

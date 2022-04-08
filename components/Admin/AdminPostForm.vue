@@ -1,34 +1,32 @@
 <template>
   <form class="new-post-form" @submit.prevent="onSave">
-    <app-control-input v-model="editedPost.author"
-      >Author Name</app-control-input
+    <app-control-input v-model="editedPost.author" label="Author Name"
+      ></app-control-input
     >
-    <app-control-input v-model="editedPost.title">Title</app-control-input>
-    <app-control-input v-model="editedPost.thumbnail"
-      >Thumbnail Link</app-control-input
+    <app-control-input v-model="editedPost.title" label="Title"></app-control-input>
+    <app-control-input v-model="editedPost.thumbnail" label="Thumbnail Link"
+      ></app-control-input
     >
-    <app-control-input v-model="editedPost.content" control-type="textarea">
-      Content
+    <app-control-input v-model="editedPost.content" control-type="textarea" label="Content">      
     </app-control-input>
-    <app-control-input v-model="editedPost.previewText" control-type="textarea">
-      Preview Text
+    <app-control-input v-model="editedPost.previewText" control-type="textarea" label="Preview Text">      
     </app-control-input>
-    <app-button type="submit">Save</app-button>
+    <app-button type="submit" title="Save"></app-button>
     <app-button
+      title="Cancel"
       type="button"
       style="margin-left: 10px"
       class="cancel"
-      @click="onCancel"
-    >
-      Cancel
+      @click="onCancel"      
+    >      
     </app-button>
     <app-button
+      title="Delete"
       type="button"
       style="margin-left: 10px"
       class="delete"
       @click="onDelete"
-    >
-      Delete
+    >      
     </app-button>
   </form>
 </template>

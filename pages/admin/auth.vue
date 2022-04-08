@@ -2,21 +2,20 @@
   <div class="admin-auth">
     <div class="admin-auth__container">
       <form @submit.prevent="onSubmit">
-        <app-control-input v-model="email" type="email"
-          >E-mail Address</app-control-input
+        <app-control-input v-model="email" type="email" label="E-mail Address"
+          ></app-control-input
         >
-        <app-control-input v-model="password" type="password"
-          >Password</app-control-input
+        <app-control-input v-model="password" type="password" label="Password"
+          ></app-control-input
         >
-        <app-button type="submit">{{
-          isLogin ? 'Login' : 'Sign Up'
-        }}</app-button>
+        <app-button type="submit" :title = 'isLogin ? "Login" : "Sign up"' ></app-button>
         <app-button
+          title="Switch to"
           type="button"
           class="inverted"
           style="margin-left: 10px"
           @click="isLogin = !isLogin"
-          >Switch to {{ isLogin ? 'Sign Up' : 'Login' }}
+          > {{ isLogin ? 'Sign Up' : 'Login' }}
         </app-button>
       </form>
     </div>

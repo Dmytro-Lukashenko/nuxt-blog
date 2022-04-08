@@ -14,9 +14,7 @@
 </template>
 
 <script>
-import TheSideNavToggle from '../TheSideNavToggle/TheSideNavToggle.vue'
-export default {
-  components: { TheSideNavToggle },
+export default { 
   data() {
     return {
       menu: [

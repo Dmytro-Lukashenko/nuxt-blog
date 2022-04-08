@@ -1,14 +1,14 @@
 <template>
-  <div class="sidenav__container">
+  <div class="sidenav">
     <div
         v-if="show"
-        class="sidenav-backdrop"
+        class="sidenav__backdrop"
         @click="$emit('close')">
     </div>
     <transition name="slide-side">
     <div
           v-if="show"
-          class="sidenav">
+          class="sidenav__nav">
       <nav-list 
         :menu="menu" 
         class="nav_sidebar"
@@ -16,8 +16,7 @@
       />
     </div> 
     </transition>
-  </div>
- 
+  </div> 
 </template>
 
 <script>

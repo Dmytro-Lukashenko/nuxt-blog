@@ -30,6 +30,6 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
 @import 'PostList.scss'
 </style>

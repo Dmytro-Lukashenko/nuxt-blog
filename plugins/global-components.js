@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import PostList from '@/components/Posts/PostList/PostList'
-import PostPreview from '@/components/Posts/PostPreview/PostPreview'
+import PostPreview from '@/components/Posts/PostList/PostPreview/PostPreview'
 import AppButton from '@/components/UI/AppButton/AppButton'
 import AppControlInput from '@/components/UI/AppControlInput/AppControlInput'
 import AdminPostForm from '@/components/Admin/AdminPostForm'
-import NavList from '@/components/Navigation/NavList/NavList'
+import NavList from '@/components/Navigation/UI/NavList/NavList'
 import TheHeader from '@/components/Navigation/TheHeader/TheHeader'
 import TheSidenav from '@/components/Navigation/TheSidenav/TheSidenav'
-import TheSideNavToggle from '@/components/Navigation/TheSideNavToggle/TheSideNavToggle'
+import TheSideNavToggle from '@/components/Navigation/UI/TheSideNavToggle/TheSideNavToggle'
 
 Vue.component('PostList', PostList)
 Vue.component('PostPreview', PostPreview)
