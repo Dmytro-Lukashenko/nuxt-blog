@@ -1,19 +1,18 @@
 <template>
-  <div class="input-control">
+<div class="input-control">
     <label class="input-control__label">
       {{label}}
     </label>
-    <input 
-      v-if="controlType === 'input'"
-      v-bind="$attrs"
+    <textarea
+      rows="10"
       :value="value"
-      class="input-control__input"
-      @input="inputHandle($event)">     
-  </div>
+      class="input-control__textarea"
+      @input="inputHandle($event)">
+    </textarea>     
+  </div>    
 </template>
-
 <script>
-export default {
+export default { 
   props: {
     controlType: {
       type: String,
@@ -37,7 +36,6 @@ export default {
   }
 }
 </script>
-
 <style lang="scss" scoped>
-@import 'AppControlInput.scss'
+@import 'AppControlTextarea.scss'
 </style>

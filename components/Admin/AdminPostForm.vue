@@ -7,10 +7,10 @@
     <app-control-input v-model="editedPost.thumbnail" label="Thumbnail Link"
       ></app-control-input
     >
-    <app-control-input v-model="editedPost.content" control-type="textarea" label="Content">      
-    </app-control-input>
-    <app-control-input v-model="editedPost.previewText" control-type="textarea" label="Preview Text">      
-    </app-control-input>
+    <app-control-textarea v-model="editedPost.content" control-type="textarea" label="Content">      
+    </app-control-textarea>
+    <app-control-textarea v-model="editedPost.previewText" control-type="textarea" label="Preview Text">      
+    </app-control-textarea>
     <app-button type="submit" title="Save"></app-button>
     <app-button
       title="Cancel"

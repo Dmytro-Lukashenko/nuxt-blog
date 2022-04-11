@@ -3,6 +3,7 @@ import PostList from '@/components/Posts/PostList/PostList'
 import PostPreview from '@/components/Posts/PostList/PostPreview/PostPreview'
 import AppButton from '@/components/UI/AppButton/AppButton'
 import AppControlInput from '@/components/UI/AppControlInput/AppControlInput'
+import AppControlTextarea from '@/components/UI/AppControlTextarea/AppControlTextarea'
 import AdminPostForm from '@/components/Admin/AdminPostForm'
 import NavList from '@/components/Navigation/UI/NavList/NavList'
 import TheHeader from '@/components/Navigation/TheHeader/TheHeader'
@@ -13,6 +14,7 @@ Vue.component('PostList', PostList)
 Vue.component('PostPreview', PostPreview)
 Vue.component('AppButton', AppButton)
 Vue.component('AppControlInput', AppControlInput)
+Vue.component('AppControlTextarea', AppControlTextarea)
 Vue.component('AdminPostForm', AdminPostForm)
 Vue.component('NavList', NavList)
 Vue.component('TheHeader', TheHeader)
