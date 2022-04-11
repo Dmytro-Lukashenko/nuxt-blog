@@ -1,19 +1,13 @@
 <template>  
-  <admin-post-form @submit="onSubmitted" />
+  <admin-post-form @submit="handlePost('addPost',$event)" />
 </template>
 
 <script>
+import handlePost from '~/mixins/handlePost'
 export default {
+  mixins: [handlePost],
   layout: 'admin',
-  middleware: ['check-auth', 'auth'],
-  methods: {
-    onSubmitted(postData) {
-      this.$store.dispatch('addPost', postData).then(() => {
-        this.$router.push('/admin')
-      })
-      .catch((e) => console.log(e))
-    },
-  },
+  middleware: ['check-auth', 'auth'],  
 }
 </script>
 

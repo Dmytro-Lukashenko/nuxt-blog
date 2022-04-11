@@ -3,15 +3,17 @@
     <section class="admin__update">
       <admin-post-form
         :post="loadedPost"
-        @submit="onSubmitted"
-        @delete="onDeleted"
+        @submit="handlePost('editPost',$event)"
+        @delete="handlePost('deletePost',$event)"
       />
     </section>
   </div>
 </template>
 
 <script>
-export default {
+import handlePost from '~/mixins/handlePost'
+export default {  
+  mixins: [handlePost],
   layout: 'admin',
   middleware: ['check-auth', 'auth'],
   asyncData(context) {
@@ -23,21 +25,7 @@ export default {
         }
       })
       .catch((e) => context.error(e))
-  },
-  methods: {
-    onSubmitted(editedPost) {
-      this.$store.dispatch('editPost', editedPost).then(() => {
-        this.$router.push('/admin')
-      })
-      .catch((e) => console.log(e))
-    },
-    onDeleted(editedPost) {
-      this.$store.dispatch('deletePost', editedPost).then(() => {        
-        this.$router.push('/admin')
-      })
-      .catch((e) => console.log(e))
-    },
-  },
+  }, 
 }
 </script>
 
