@@ -8,6 +8,10 @@ import {
   CLEAR_TOKEN,
 } from './-listMutations'
 
+const postIndex1 = (state, editedPost) => {
+  return state.loadedPosts.findIndex((post) => post.id === editedPost.id)
+}
+
 export const state = () => ({
   loadedPosts: [],
   token: null,
@@ -24,7 +28,9 @@ export const mutations = {
     const postIndex = state.loadedPosts.findIndex(
       (post) => post.id === editedPost.id
     )
-    state.loadedPosts[postIndex] = editedPost
+    console.log(postIndex)
+    console.log(postIndex1(state, editedPost))
+    state.loadedPosts[postIndex1(state, editedPost)] = editedPost
   },
   [SET_TOKEN](state, token) {
     state.token = token
@@ -33,10 +39,7 @@ export const mutations = {
     state.token = null
   },
   [DELETE_POST](state, editedPost) {
-    const postIndex = state.loadedPosts.findIndex(
-      (post) => post.id === editedPost.id
-    )
-    const id = state.loadedPosts[postIndex].id
+    const id = state.loadedPosts[postIndex1(state, editedPost)].id
     state.loadedPosts = state.loadedPosts.filter((post) => post.id !== id)
   },
 }
@@ -63,32 +66,26 @@ export const actions = {
       })
       .catch((e) => console.log(e))
   },
-  editPost(vuexContext, editedPost) {
+  editPost({ state, commit }, editedPost) {
     return this.$axios
-      .$put(
-        'posts/' + editedPost.id + '.json?auth=' + vuexContext.state.token,
-        editedPost
-      )
+      .$put('posts/' + editedPost.id + '.json?auth=' + state.token, editedPost)
       .then((res) => {
-        vuexContext.commit('EDIT_POST', editedPost)
+        commit('EDIT_POST', editedPost)
       })
       .catch((e) => console.log(e))
   },
-  deletePost(vuexContext, editedPost) {
+  deletePost({ state, commit }, editedPost) {
     return this.$axios
-      .delete(
-        'posts/' + editedPost.id + '.json?auth=' + vuexContext.state.token
-      )
+      .delete('posts/' + editedPost.id + '.json?auth=' + state.token)
       .then((res) => {
-        console.log('delete successful', editedPost.id)
-        vuexContext.commit('DELETE_POST', editedPost)
+        commit('DELETE_POST', editedPost)
       })
       .catch((e) => console.log(e))
   },
-  setPosts(vuexContext, posts) {
-    vuexContext.commit('SET_POSTS', posts)
+  setPosts({ commit }, posts) {
+    commit('SET_POSTS', posts)
   },
-  authenticateUser(vuexContext, authData) {
+  authenticateUser({ commit }, authData) {
     let authUrl =
       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' +
       process.env.fbAPIKey
@@ -104,7 +101,7 @@ export const actions = {
         returnSecureToken: true,
       })
       .then((result) => {
-        vuexContext.commit('SET_TOKEN', result.idToken)
+        commit('SET_TOKEN', result.idToken)
         localStorage.setItem('token', result.idToken)
         localStorage.setItem(
           'tokenExpiration',
@@ -121,7 +118,7 @@ export const actions = {
       })
       .catch((e) => console.log(e))
   },
-  initAuth(vuexContext, req) {
+  initAuth({ commit, dispatch }, req) {
     let token
     let expirationDate
     if (req) {
@@ -152,12 +149,12 @@ export const actions = {
     }
     if (new Date().getTime() > +expirationDate || !token) {
       console.log('No token or invalid token')
-      vuexContext.dispatch('logout')
+      dispatch('logout')
       return
     }
-    vuexContext.commit('SET_TOKEN', token)
+    commit('SET_TOKEN', token)
   },
-  logout(vuexContext) {
+  logout() {
     this.commit('CLEAR_TOKEN')
     Cookie.remove('token')
     Cookie.remove('expirationDate')
@@ -173,6 +170,6 @@ export const getters = {
     return state.loadedPosts
   },
   isAuthenticated(state) {
-    return state.token != null
+    return !!state.token
   },
 }
