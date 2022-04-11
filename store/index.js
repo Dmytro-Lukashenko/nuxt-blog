@@ -41,53 +41,16 @@ export const mutations = {
 
 export const actions = {
   nuxtServerInit({ dispatch }, context) {
-    console.log(context.req.headers.cookie)
-
-    if (context.req) {
-      if (!context.req.headers.cookie) {
-        return
-      }
-      const jwtCookie = context.req.headers.cookie
-        .split(';')
-        .find((key) => key.trim().startsWith('jwt='))
-      if (!jwtCookie) {
-        return
-      }
-      if (!context.req.headers.cookie.includes(';')) {
-        return
-      }
-      const expirationDateCookie = context.req.headers.cookie
-        .split(';')
-        .find((key) => key.trim().startsWith('expirationDate='))
-        .split('=')[1]
-      if (!expirationDateCookie) {
-        return
-      }
-      const token = jwtCookie.split('=')[1]
-      if (token) {
-        return context.app.$axios
-          .$get('posts.json')
-          .then((data) => {
-            const postsArray = []
-            for (const key in data) {
-              postsArray.push({ ...data[key], id: key })
-            }
-            dispatch('setPosts', postsArray)
-          })
-          .catch((e) => context.error(e))
-      }
-    } else {
-      return context.app.$axios
-        .$get('posts.json')
-        .then((data) => {
-          const postsArray = []
-          for (const key in data) {
-            postsArray.push({ ...data[key], id: key })
-          }
-          dispatch('setPosts', postsArray)
-        })
-        .catch((e) => context.error(e))
-    }
+    return context.app.$axios
+      .$get('posts.json')
+      .then((data) => {
+        const postsArray = []
+        for (const key in data) {
+          postsArray.push({ ...data[key], id: key })
+        }
+        dispatch('setPosts', postsArray)
+      })
+      .catch((e) => context.error(e))
   },
   addPost({ state, commit }, post) {
     const createdPost = { ...post, updatedDate: new Date() }
