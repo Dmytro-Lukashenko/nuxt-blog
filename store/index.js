@@ -8,7 +8,7 @@ import {
   CLEAR_TOKEN,
 } from './-listMutations'
 
-const postIndex1 = (state, editedPost) => {
+const postIndex = (state, editedPost) => {
   return state.loadedPosts.findIndex((post) => post.id === editedPost.id)
 }
 
@@ -25,12 +25,7 @@ export const mutations = {
     state.loadedPosts.push(post)
   },
   [EDIT_POST](state, editedPost) {
-    const postIndex = state.loadedPosts.findIndex(
-      (post) => post.id === editedPost.id
-    )
-    console.log(postIndex)
-    console.log(postIndex1(state, editedPost))
-    state.loadedPosts[postIndex1(state, editedPost)] = editedPost
+    state.loadedPosts[postIndex(state, editedPost)] = editedPost
   },
   [SET_TOKEN](state, token) {
     state.token = token
@@ -39,7 +34,7 @@ export const mutations = {
     state.token = null
   },
   [DELETE_POST](state, editedPost) {
-    const id = state.loadedPosts[postIndex1(state, editedPost)].id
+    const id = state.loadedPosts[postIndex(state, editedPost)].id
     state.loadedPosts = state.loadedPosts.filter((post) => post.id !== id)
   },
 }
